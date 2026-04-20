@@ -24,15 +24,13 @@ buttonSave.addEventListener("click", async (e) => {
   lng = inputlongitude.value;
   loc = inputlocation.value;
 
-  const { error } = supabase.from("cordinates").insert([
+  const { error } = await supabase.from("cordinates").insert([
     {
       latitud: lat,
       longitud: lng,
-      location_name: loc,
+      location: loc,
     },
   ]);
-
-  console.error(error);
 
   popup.close();
 });
@@ -45,7 +43,10 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 async function cargarIconosalIniciar() {
-  const { data, error } = await supabase.from("cordinates".select("*"));
+  const { data, error } = await supabase.from("cordinates").select("*");
+
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
 
   data.forEach((renglon) => {
     clickMarker = L.marker([renglon.latitud, renglon.longitud]).addTo(map);
