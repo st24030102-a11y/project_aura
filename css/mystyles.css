@@ -1,0 +1,12 @@
+.page {
+  width: 1280px;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: rgb(33, 143, 239);
+}
+
+#map {
+  height: 520px;
+  width: 100%;
+  border-radius: 12px;
+}
